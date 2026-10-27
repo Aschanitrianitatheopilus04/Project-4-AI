@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Geophysical Exploration Intelligence Dashboard</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-color: #212529;
+            --sidebar-bg: #112233;
+        }
+        [data-bs-theme="dark"] {
+            --bg-body: #121824;
+            --bg-card: #1b2431;
+            --text-color: #f8f9fa;
+            --sidebar-bg: #0a0f18;
+        }
+        body { background-color: var(--bg-body); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background 0.3s, color 0.3s; }
+        .sidebar { background-color: var(--sidebar-bg); color: white; min-height: 100vh; position: fixed; width: 260px; z-index: 1000; }
+        .main-content { margin-left: 260px; padding: 30px; }
+        .card-metric { background-color: var(--bg-card); border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .card-metric:hover { transform: translateY(-4px); }
+        .chart-container { background-color: var(--bg-card); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .table-card { background-color: var(--bg-card); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .nav-link { color: rgba(255,255,255,0.7); border-radius: 8px; margin-bottom: 5px; transition: 0.2s; }
+        .nav-link:hover, .nav-link.active { background-color: rgba(255,255,255,0.1); color: #fff; }
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; position: relative; min-height: auto; }
+            .main-content { margin-left: 0; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar p-4 d-none d-md-block">
+        <h4 class="fw-bold mb-4 text-info"><i class="fa-solid fa-globe me-2"></i>GeoPulse AI</h4>
+        <p class="small text-muted mb-4">Enterprise Exploration Intelligence & Academic Suite</p>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link active"><i class="fa-solid fa-chart-line me-2"></i>Executive Overview</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link"><i class="fa-solid fa-layer-group me-2"></i>Analisis Metode</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link"><i class="fa-solid fa-map-location-dot me-2"></i>Distribusi Wilayah</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link"><i class="fa-solid fa-shield-halved me-2"></i>HSE & Kontrol Kualitas</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link"><i class="fa-solid fa-database me-2"></i>Database Master (450)</a></li>
+        </ul>
+        <div class="mt-5 pt-5 border-top border-secondary text-muted small">
+            <p>Versi: 3.5 Enterprise<br>Status: <span class="text-success fw-bold">Live Synchronized</span></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <div>
+                <h2 class="fw-bold mb-1">Dashboard Eksplorasi Geofisika Komprehensif</h2>
+                <p class="text-muted mb-0">Analisis Ekonomi Proyek, Parameter Lapangan, dan Kinerja Metode Bawah Permukaan (2024–2026)</p>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-outline-secondary btn-sm" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke me-1"></i> Ganti Tema</button>
+                <button class="btn btn-primary btn-sm" onclick="alert('Laporan berhasil diexport ke format PDF/Excel siap kumpul!')"><i class="fa-solid fa-download me-1"></i> Export Laporan</button>
+            </div>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="row g-4 mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="card card-metric p-3 border-start border-primary border-4">
+                    <div class="text-muted small fw-bold">TOTAL NET REVENUE</div>
+                    <h3 class="fw-bold text-primary mb-0 mt-1">$15,815,467.93</h3>
+                    <small class="text-success mt-2 d-block"><i class="fa-solid fa-arrow-up me-1"></i> +14.8% dari target tahun lalu</small>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card card-metric p-3 border-start border-success border-4">
+                    <div class="text-muted small fw-bold">TOTAL NET PROFIT</div>
+                    <h3 class="fw-bold text-success mb-0 mt-1">$5,122,310.12</h3>
+                    <small class="text-success mt-2 d-block"><i class="fa-solid fa-arrow-up me-1"></i> Margin Sehat 28%+</small>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card card-metric p-3 border-start border-warning border-4">
+                    <div class="text-muted small fw-bold">RATA-RATA PROFIT MARGIN</div>
+                    <h3 class="fw-bold text-warning mb-0 mt-1">32.02%</h3>
+                    <small class="text-muted mt-2 d-block"><i class="fa-solid fa-check me-1"></i> Efisiensi Operasional Optimal</small>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card card-metric p-3 border-start border-info border-4">
+                    <div class="text-muted small fw-bold">TOTAL PROYEK & NOISE LEVEL</div>
+                    <h3 class="fw-bold text-info mb-0 mt-1">450 Proyek</h3>
+                    <small class="text-muted mt-2 d-block"><i class="fa-solid fa-wave-square me-1"></i> Rata-rata Noise: 2.44%</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Pendapatan vs Keuntungan per Metode Geofisika</h5>
+                        <span class="badge bg-primary-subtle text-primary">Analisis Finansial</span>
+                    </div>
+                    <canvas id="methodRevenueChart" height="130"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Komposisi Metode</h5>
+                        <span class="badge bg-success-subtle text-success">Distribusi</span>
+                    </div>
+                    <canvas id="categoryDonut" height="240"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regional Performance Chart -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-12">
+                <div class="chart-container">
+                    <h5 class="fw-bold mb-3">Akumulasi Net Profit Berdasarkan Wilayah Eksplorasi (Region)</h5>
+                    <canvas id="regionChart" height="90"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Interactive Table with Search Feature -->
+        <div class="table-card">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <h5 class="fw-bold mb-0"><i class="fa-solid fa-table me-2"></i>Database Interaktif & Rekapitulasi Proyek Lapangan</h5>
+                <div class="input-group" style="width: 300px;">
+                    <span class="input-group-text bg-transparent"><i class="fa-solid fa-search"></i></span>
+                    <input type="text" id="tableSearch" class="form-control form-control-sm" placeholder="Cari proyek, klien, metode..." onkeyup="filterTable()">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle" id="projectTable">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Project ID</th>
+                            <th>Tanggal</th>
+                            <th>Metode Geofisika</th>
+                            <th>Klien</th>
+                            <th>Region</th>
+                            <th>Net Revenue</th>
+                            <th>Net Profit</th>
+                            <th>Margin</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td><code>PRJ-GEO-0001</code></td>
+                            <td>2024-04-12</td>
+                            <td><span class="fw-semibold text-primary">High-Resolution Aeromagnetic</span></td>
+                            <td>Medco E&P Indonesia</td>
+                            <td>Nusa Tenggara</td>
+                            <td>$54,678.55</td>
+                            <td class="fw-bold text-success">$15,253.71</td>
+                            <td>27.9%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0002</code></td>
+                            <td>2025-03-11</td>
+                            <td><span class="fw-semibold text-primary">Magnetotelluric (MT)</span></td>
+                            <td>PT Bukit Asam Tbk</td>
+                            <td>Sumatera</td>
+                            <td>$48,184.66</td>
+                            <td class="fw-bold text-success">$6,966.29</td>
+                            <td>14.46%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0003</code></td>
+                            <td>2026-05-10</td>
+                            <td><span class="fw-semibold text-primary">GPR Subsurface Tomography</span></td>
+                            <td>PT Pertamina Hulu Energi</td>
+                            <td>Kalimantan</td>
+                            <td>$63,989.83</td>
+                            <td class="fw-bold text-success">$13,893.85</td>
+                            <td>21.71%</td>
+                            <td><span class="badge bg-secondary">In-Progress</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0004</code></td>
+                            <td>2024-09-27</td>
+                            <td><span class="fw-semibold text-primary">InSAR Ground Deformation</span></td>
+                            <td>PT Antam Tbk - UBP Nikel</td>
+                            <td>Kalimantan</td>
+                            <td>$6,214.40</td>
+                            <td class="fw-bold text-success">$1,520.84</td>
+                            <td>24.47%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0005</code></td>
+                            <td>2024-04-16</td>
+                            <td><span class="fw-semibold text-primary">Multichannel Analysis of Surface Waves (MASW)</span></td>
+                            <td>PT Vale Indonesia</td>
+                            <td>Nusa Tenggara</td>
+                            <td>$32,636.51</td>
+                            <td class="fw-bold text-success">$10,509.57</td>
+                            <td>32.2%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0006</code></td>
+                            <td>2024-03-12</td>
+                            <td><span class="fw-semibold text-primary">Multichannel Analysis of Surface Waves (MASW)</span></td>
+                            <td>PT Pertamina Hulu Energi</td>
+                            <td>Maluku & Papua</td>
+                            <td>$8,123.55</td>
+                            <td class="fw-bold text-success">$1,682.39</td>
+                            <td>20.71%</td>
+                            <td><span class="badge bg-secondary">In-Progress</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0007</code></td>
+                            <td>2025-12-01</td>
+                            <td><span class="fw-semibold text-primary">Magnetotelluric (MT)</span></td>
+                            <td>PT Bukit Asam Tbk</td>
+                            <td>Maluku & Papua</td>
+                            <td>$18,401.42</td>
+                            <td class="fw-bold text-success">$7,457.06</td>
+                            <td>40.52%</td>
+                            <td><span class="badge bg-secondary">Data Verification</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0008</code></td>
+                            <td>2024-01-21</td>
+                            <td><span class="fw-semibold text-primary">Self-Potential (SP)</span></td>
+                            <td>PT Trimegah Bangun Persada</td>
+                            <td>Sumatera</td>
+                            <td>$7,635.94</td>
+                            <td class="fw-bold text-success">$2,011.36</td>
+                            <td>26.34%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0009</code></td>
+                            <td>2025-09-06</td>
+                            <td><span class="fw-semibold text-primary">GPR Subsurface Tomography</span></td>
+                            <td>PT Pertamina Hulu Energi</td>
+                            <td>Sumatera</td>
+                            <td>$31,893.10</td>
+                            <td class="fw-bold text-success">$14,688.80</td>
+                            <td>46.06%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0010</code></td>
+                            <td>2024-05-01</td>
+                            <td><span class="fw-semibold text-primary">Mikrogravitasi 3D</span></td>
+                            <td>PT Pertamina Hulu Energi</td>
+                            <td>Sulawesi</td>
+                            <td>$30,635.70</td>
+                            <td class="fw-bold text-success">$7,112.30</td>
+                            <td>23.22%</td>
+                            <td><span class="badge bg-secondary">In-Progress</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0011</code></td>
+                            <td>2025-04-11</td>
+                            <td><span class="fw-semibold text-primary">Time-Domain EM (TDEM)</span></td>
+                            <td>PT Chevron Geothermal</td>
+                            <td>Nusa Tenggara</td>
+                            <td>$68,567.53</td>
+                            <td class="fw-bold text-success">$24,159.05</td>
+                            <td>35.23%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0012</code></td>
+                            <td>2024-08-02</td>
+                            <td><span class="fw-semibold text-primary">Multichannel Analysis of Surface Waves (MASW)</span></td>
+                            <td>PT Amman Mineral</td>
+                            <td>Maluku & Papua</td>
+                            <td>$86,668.88</td>
+                            <td class="fw-bold text-success">$38,694.26</td>
+                            <td>44.65%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0013</code></td>
+                            <td>2024-11-26</td>
+                            <td><span class="fw-semibold text-primary">Mikrogravitasi 3D</span></td>
+                            <td>PT Chevron Geothermal</td>
+                            <td>Jawa</td>
+                            <td>$45,342.70</td>
+                            <td class="fw-bold text-success">$19,742.62</td>
+                            <td>43.54%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0014</code></td>
+                            <td>2025-04-03</td>
+                            <td><span class="fw-semibold text-primary">Mikrogravitasi 3D</span></td>
+                            <td>Konsultan Geoteknik Nusantara</td>
+                            <td>Kalimantan</td>
+                            <td>$60,420.48</td>
+                            <td class="fw-bold text-success">$22,624.56</td>
+                            <td>37.45%</td>
+                            <td><span class="badge bg-secondary">Completed</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td><code>PRJ-GEO-0015</code></td>
+                            <td>2024-03-28</td>
+                            <td><span class="fw-semibold text-primary">High-Resolution Aeromagnetic</span></td>
+                            <td>Medco E&P Indonesia</td>
+                            <td>Sumatera</td>
+                            <td>$62,938.90</td>
+                            <td class="fw-bold text-success">$11,162.00</td>
+                            <td>17.73%</td>
+                            <td><span class="badge bg-secondary">In-Progress</span></td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-muted small text-end mt-2">Menampilkan 15 dari total 450 data eksplorasi komprehensif.</div>
+        </div>
+    </div>
+
+    <!-- Script Chart & Interactivity -->
+    <script>
+        // Theme toggler
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-bs-theme');
+            html.setAttribute('data-bs-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        // Live Table Search Filter
+        function filterTable() {
+            const input = document.getElementById("tableSearch");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("projectTable");
+            const tr = table.getElementsByTagName("tr");
+            for (let i = 1; i < tr.length; i++) {
+                let txtValue = tr[i].textContent || tr[i].innerText;
+                tr[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+
+        // Bar Chart - Method Revenue vs Profit
+        const ctx1 = document.getElementById('methodRevenueChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['GPR Subsurface Tomography', 'High-Resolution Aeromagnetic', 'InSAR Ground Deformation', 'Magnetotelluric (MT)', 'Mikrogravitasi 3D', 'Multichannel Analysis of Surface Waves (MASW)'],
+                datasets: [{
+                    label: 'Net Revenue (USD)',
+                    data: [1817710.79, 1864377.65, 1900182.27, 2099100.73, 1826737.75, 2022129.62],
+                    backgroundColor: '#1f4e78',
+                    borderRadius: 6
+                }, {
+                    label: 'Net Profit (USD)',
+                    data: [600436.38, 557980.8, 633619.79, 688730.0, 615440.75, 642839.94],
+                    backgroundColor: '#2ca02c',
+                    borderRadius: 6
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'top' } } }
+        });
+
+        // Donut Chart - Category
+        const ctx2 = document.getElementById('categoryDonut').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Elektromagnetik', 'Gadrars / GPR', 'Geomagnet', 'Gravity', 'Kelistrikan', 'Remote Sensing', 'Seismik'],
+                datasets: [{
+                    data: [126, 56, 54, 48, 46, 62, 58],
+                    backgroundColor: ['#1f4e78', '#2ca02c', '#ff7f0e', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f']
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } } }
+        });
+
+        // Region Bar Chart
+        const ctx3 = document.getElementById('regionChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Jawa', 'Kalimantan', 'Maluku & Papua', 'Nusa Tenggara', 'Sulawesi', 'Sumatera'],
+                datasets: [{
+                    label: 'Akumulasi Net Profit (USD)',
+                    data: [912726.04, 750270.57, 940104.82, 865050.93, 933444.62, 720713.14],
+                    borderColor: '#17a2b8',
+                    backgroundColor: 'rgba(23, 162, 184, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'top' } } }
+        });
+    </script>
+</body>
+</html>
